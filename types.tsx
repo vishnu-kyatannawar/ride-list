@@ -33,3 +33,9 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> = Composit
   BottomTabScreenProps<RootTabParamList, Screen>,
   NativeStackScreenProps<RootStackParamList>
 >;
+
+export type Ride = {
+  id: number,
+  place: string,
+  status: 1 | 0
+};

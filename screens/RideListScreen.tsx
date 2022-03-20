@@ -1,13 +1,27 @@
+import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
+import RideTile from '../components/RideTile';
+import { RootTabScreenProps, Ride } from '../types';
 
 export default function RideListScreen({ navigation }: RootTabScreenProps<'RideList'>) {
+  const [rideList, setRideList] = useState<Ride[]>([{
+    id: 1,
+    place: 'Place A',
+    status: 1
+  },
+  {
+    id: 2,
+    place: 'Place B',
+    status: 1
+  }]);
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Ride List</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+    <View style={ styles.container }>
+      {rideList.map((ride) => {
+        return <RideTile key  = { ride.id } ride={ ride } />;
+      })}
     </View>
   );
 }
@@ -15,16 +29,7 @@ export default function RideListScreen({ navigation }: RootTabScreenProps<'RideL
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+    flexDirection: 'column',
+    padding: '20px',
+  }
 });
